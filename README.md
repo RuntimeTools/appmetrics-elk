@@ -104,7 +104,8 @@ Additional data is then included depending on the monitoring event.
 <a name="custom-data"></a>
 ### Sending Custom Data to ElasticSearch
 The Node Application Metrics to ELK Connector registers for events that it is aware of, and forwards the data from those events to ElasticSearch. The registration for those events is based on the 'mappings' files in the following directory:
-```node_modules/appmetrics-elk/mappings/
+```sh
+node_modules/appmetrics-elk/mappings/
 ```
 Any mappings files found in that directory are both used to configure how ElasticSearch handles the data, and to configure the monitoring events that are forwarded.
 
