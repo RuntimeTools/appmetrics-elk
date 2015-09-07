@@ -1,0 +1,28 @@
+{
+  "name": "appmetrics-elk",
+  "version": "1.0.0",
+  "description": "ELK Connector for Node Application Metrics",
+  "main": "index.js",
+  "dependencies": {
+    "appmetrics": "^1.0.2",
+    "elasticsearch": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "appmetrics",
+    "logstash",
+    "elasticsearch",
+    "kibana",
+    "elk",
+    "performance",
+    "monitoring"
+  ],
+  "author": "Chris Bailey <baileyc@uk.ibm.com>",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/RuntimeTools/appmetrics-elk"
+  },
+  "license": "Apache-2.0"
+}

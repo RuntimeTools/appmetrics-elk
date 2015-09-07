@@ -1,0 +1,21 @@
+{
+    "index":  "appmetrics",
+    "type":   "mongo",
+    "body": {
+        "_source" : {"compress" : true},
+        "_ttl" : {"enabled" : true, "default" : "90d"},
+        "properties": {
+            "timestamp":    {"type": "date", "format": "dateOptionalTime"},
+            "hostName":     {"type": "string", "index": "not_analyzed"},
+            "pid":          {"type": "integer"},
+            "mongo": {
+                "type": "nested",
+                "include_in_parent": true,
+                "properties": {            
+                    "query":      {"type": "string", "index": "not_analyzed"},
+                    "duration":   {"type": "long"}
+                }
+            }
+        }   
+    }
+}

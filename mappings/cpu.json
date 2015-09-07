@@ -1,0 +1,21 @@
+{
+    "index":  "appmetrics",
+    "type":   "cpu",
+    "body": {
+        "_source" : {"compress" : true},
+        "_ttl" : {"enabled" : true, "default" : "90d"},
+        "properties": {
+            "timestamp":    {"type": "date", "format": "dateOptionalTime"},
+            "hostName":     {"type": "string", "index": "not_analyzed"},
+            "pid":          {"type": "integer"},
+            "cpu": {
+                "type": "nested",
+                "include_in_parent": true,
+                "properties": {            
+                    "process":      {"type": "float"},
+                    "system":       {"type": "float"}
+                }
+            }
+        }   
+    }
+}

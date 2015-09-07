@@ -1,0 +1,30 @@
+{
+    "index":  "appmetrics",
+    "type":   "memory",
+    "body": {
+        "_source" : {"compress" : true},
+        "_ttl" : {"enabled" : true, "default" : "90d"},
+        "properties": {
+            "timestamp":    {"type": "date", "format": "dateOptionalTime"},
+            "hostName":     {"type": "string", "index": "not_analyzed"},
+            "pid":          {"type": "integer"},
+            "memory.process" : {
+                "type": "nested",
+                "include_in_parent": true,
+                "properties": {
+                    "private":  {"type": "long"},
+                    "physical": {"type": "long"},
+                    "virtual":  {"type": "long"}
+                }
+            },
+            "memory.system" : {
+                "type": "nested",
+                "include_in_parent": true,
+                "properties": {
+                    "physical": {"type": "long"},
+                    "total":    {"type": "long"}
+                }                           
+            }
+        }
+    }
+}
