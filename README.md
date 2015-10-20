@@ -57,6 +57,7 @@ The ELK Connector for Node Application Metrics uploads its data to the 'appmetri
  timestamp               | The time when the monitoring event occurred
  hostName                | The hostname for the machine the monitored process is running on
  pid                     | The process ID for the monitored process
+ applicationName         | The JavaScript file used to launch the application, or a custom name
  
 Additional data is then included depending on the monitoring event.
 
