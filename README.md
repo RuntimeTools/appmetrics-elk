@@ -25,6 +25,11 @@ appmetrics.disable('mysql');            // disable MySQL monitoring
 ```
 
 Additionally, the `monitor()` API call can be passed an optional [ElasticSearch Configuration][3] object to configure the ElasticSearch connection, including database location and security.  
+
+The same configuration object can be used to pass configuration to the ELK connector. The following configurations can be applied:
+* `index` (String) the name of the index to use for storing the monitoring data. The default is `appmetrics`.
+* `applicationName` (String) the name to use for the applicationName field in the monitoring data. The default is the name of the applications main file, eg. `app.js`.
+
 ```js
 var config = {
     hosts: [
@@ -34,7 +39,9 @@ var config = {
     ssl: {
         ca: fs.readFileSync('./cacert.pem'),
         rejectUnauthorized: true
-    }
+    },
+    index: 'nodedata',
+    applicationName: 'HelloWorld'
 }
 
 var appmetrics = require('appmetrics-elk').monitor(config);
@@ -173,7 +180,10 @@ You can also create your own charts using the "Visualize" tab.
 The Node Application Metrics to ELK Connector is licensed using an Apache v2.0 License.
 
 ### Version
-1.0.0
+The current version is 1.0.1
+
+1.0.1 Support for configurable indexes and addition of applicationName field  
+1.0.0 Initial release
 
 [1]:https://www.elastic.co/downloads/elasticsearch
 [2]:https://www.elastic.co/downloads/kibana
