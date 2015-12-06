@@ -1,0 +1,22 @@
+{
+    "index":  "appmetrics",
+    "type":   "postgres",
+    "body": {
+        "_source" : {"compress" : true},
+        "_ttl" : {"enabled" : true, "default" : "90d"},
+        "properties": {
+            "timestamp":        {"type": "date", "format": "dateOptionalTime"},
+            "hostName":         {"type": "string", "index": "not_analyzed"},
+            "pid":              {"type": "integer"},
+            "applicationName":  {"type": "string", "index": "not_analyzed"},
+            "postgres": {
+                "type": "nested",
+                "include_in_parent": true,
+                "properties": {            
+                    "query":      {"type": "string", "index": "not_analyzed"},
+                    "duration":   {"type": "long"}
+                }
+            }
+        }   
+    }
+}
