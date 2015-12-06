@@ -1,0 +1,23 @@
+{
+    "index":  "appmetrics",
+    "type":   "eventloop",
+    "body": {
+        "_source" : {"compress" : true},
+        "_ttl" : {"enabled" : true, "default" : "90d"},
+        "properties": {
+            "timestamp":        {"type": "date", "format": "dateOptionalTime"},
+            "hostName":         {"type": "string", "index": "not_analyzed"},
+            "pid":              {"type": "integer"},
+            "applicationName":  {"type": "string", "index": "not_analyzed"},
+            "eventloop" : {
+                "type": "nested",
+                "include_in_parent": true,
+                "properties": {
+                    "latency.min":	{"type": "long"},
+                    "latency.max":	{"type": "long"},
+                    "latency.avg":	{"type": "long"}
+                }
+            }
+        }
+    }
+}
