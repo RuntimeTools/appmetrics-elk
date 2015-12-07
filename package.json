@@ -1,10 +1,10 @@
 {
   "name": "appmetrics-elk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ELK Connector for Node Application Metrics",
   "main": "index.js",
   "dependencies": {
-    "appmetrics": "^1.0.2",
+    "appmetrics": "^1.0.4",
     "elasticsearch": "*"
   },
   "scripts": {
