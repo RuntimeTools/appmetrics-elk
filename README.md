@@ -87,6 +87,14 @@ Additional data is then included depending on the monitoring event.
  gc.type                 | The type of GC cycle, either 'M' or 'S'
  gc.duration             | The duration of the GC cycle in milliseconds
  
+**Event Loop Latency Data**  
+
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ eventloop.latency.min   | The shortest sampled latency for processing an event
+ eventloop.latency.max   | The longest sampled latency for processing an event
+ eventloop.latency.avg   | The mean sampled latency for processing an event
+ 
 **HTTP Request Data**  
 
  Value                   | Description
@@ -94,6 +102,14 @@ Additional data is then included depending on the monitoring event.
  http.method             | The HTTP method used for the request
  http.url                | The URL on which the request was made
  http.duration           | The time taken for the HTTP request to be responded to in ms 
+ 
+ **Socket.io Data**  
+ 
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ socketio.method         | The type of socketio event, either `broadcast`, `emit` or `receive`
+ socketio.event          | The name of the socketio event
+ sokcetio.duration       | The time taken for the socketio event to be handled in ms 
 
 **MongoDB Query Data**
   
@@ -109,6 +125,58 @@ Additional data is then included depending on the monitoring event.
  mysql.query             | The query made of the MySQL database
  mysql.duration          | The time taken for the MySQL query to be responded to in ms 
 
+ **PostgreSQL Query Data**  
+ 
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ postgres.query          | The query made of the PostgreSQL database
+ postgres.duration       | The time taken for the postgreSQL query to be responded to in ms 
+
+ **Redis Command Data**  
+ 
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ redis.cmd               | The Redis command sent to the server or 'batch.exec'/'multi.exec'
+ redis.duration          | The time taken for the Redis command to be handled to in ms 
+
+ **Memcached Operation Data**  
+ 
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ memcached.method        | The method used in the memcached client, eg `set`, `get`, `append`, `delete`, etc.
+ memcached.key           | The the key associated with the data
+ memcached.duration      | The time taken for the memcached command to be handled to in ms 
+
+ **Leveldown Query Data**  
+ 
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ leveldown.method        | The leveldown method being used.
+ leveldown.key           | The key being used for a call to `get`, `put` or `del`
+ leveldown.value         | The value being added to the LevelDB database using the `put` method
+ leveldown.opCount       | The number of operations carried out by a `batch` method
+ leveldown.duration      | The time taken for the leveldown query to be handled to in ms 
+
+
+ **MQTT Message Data**  
+ 
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ mqtt.method             | Either a `publish` or a received `message`
+ mqtt.topic              | The topic on which the message is published or received.
+ mqtt.qos                | The quality of service used for the message
+ mqtt.duration           | The time taken for the message to be handled to in ms 
+
+ **MQLight Message Data**  
+ 
+ Value                   | Description
+:------------------------|:-------------------------------------------
+ mqlight.method          | Either a `send` or a received `message`
+ mqlight.topic           | The topic on which the message is published or received.
+ mqlight.qos             | The quality of service used for the message
+ mqlight.data            | The first 25 characters of the message
+ mqlight.duration        | The time taken for the message to be handled to in ms 
+ 
 <a name="custom-data"></a>
 ### Sending Custom Data to ElasticSearch
 The Node Application Metrics to ELK Connector registers for events that it is aware of, and forwards the data from those events to ElasticSearch. The registration for those events is based on the 'mappings' files in the following directory:
@@ -181,8 +249,9 @@ You can also create your own charts using the "Visualize" tab.
 The Node Application Metrics to ELK Connector is licensed using an Apache v2.0 License.
 
 ### Version
-The current version is 1.0.1
+The current version is 1.0.2
 
+1.0.2 Support for new monitoring data  
 1.0.1 Support for configurable indexes and addition of applicationName field  
 1.0.0 Initial release
 
