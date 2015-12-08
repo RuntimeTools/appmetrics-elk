@@ -2,7 +2,6 @@
     "index":  "appmetrics",
     "type":   "mongo",
     "body": {
-        "_source" : {"compress" : true},
         "_ttl" : {"enabled" : true, "default" : "90d"},
         "properties": {
             "timestamp":        {"type": "date", "format": "dateOptionalTime"},
