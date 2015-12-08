@@ -2,7 +2,6 @@
     "index":  "appmetrics",
     "type":   "eventloop",
     "body": {
-        "_source" : {"compress" : true},
         "_ttl" : {"enabled" : true, "default" : "90d"},
         "properties": {
             "timestamp":        {"type": "date", "format": "dateOptionalTime"},
@@ -13,9 +12,15 @@
                 "type": "nested",
                 "include_in_parent": true,
                 "properties": {
-                    "latency.min":	{"type": "long"},
-                    "latency.max":	{"type": "long"},
-                    "latency.avg":	{"type": "long"}
+                	"latency": {
+                        "type": "nested",
+                        "include_in_parent": true,
+                        "properties": {
+                            "min":	{"type": "long"},
+                            "max":	{"type": "long"},
+                            "avg":	{"type": "long"}
+                        }
+                	}
                 }
             }
         }
