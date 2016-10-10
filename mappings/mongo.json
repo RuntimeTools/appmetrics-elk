@@ -12,6 +12,8 @@
                 "type": "nested",
                 "include_in_parent": true,
                 "properties": {            
+                    "collection": {"type": "string", "index": "not_analyzed"},
+                    "method":     {"type": "string", "index": "not_analyzed"},
                     "query":      {"type": "string", "index": "not_analyzed"},
                     "duration":   {"type": "long"}
                 }

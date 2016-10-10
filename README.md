@@ -115,6 +115,8 @@ Additional data is then included depending on the monitoring event.
   
  Value                   | Description
 :------------------------|:-------------------------------------------
+ mongo.collection        | The MongoDB collection name query made on
+ mongo.method            | The executed method for the query, such as find, update
  mongo.query             | The query made of the MongoDB database
  mongo.duration          | The time taken for the MongoDB query to be responded to in ms 
  
