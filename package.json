@@ -4,7 +4,7 @@
   "description": "ELK Connector for Node Application Metrics",
   "main": "index.js",
   "dependencies": {
-    "appmetrics": "^1.0.4",
+    "appmetrics": "^3.0.0",
     "elasticsearch": "*"
   },
   "scripts": {
