@@ -1,11 +1,11 @@
 {
   "name": "appmetrics-elk",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "ELK Connector for Node Application Metrics",
   "main": "index.js",
   "dependencies": {
-    "appmetrics": "^1.0.4",
-    "elasticsearch": "*"
+    "appmetrics": "^3.0.0",
+    "elasticsearch": "13.3.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,9 +20,9 @@
     "monitoring"
   ],
   "author": "Chris Bailey <baileyc@uk.ibm.com>",
-  "repository" : {
-    "type" : "git",
-    "url" : "git://github.com/RuntimeTools/appmetrics-elk"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RuntimeTools/appmetrics-elk"
   },
   "license": "Apache-2.0"
 }
