@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "appmetrics": "^3.0.0",
-    "elasticsearch": "13.3.1"
+    "elasticsearch": "^6.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
