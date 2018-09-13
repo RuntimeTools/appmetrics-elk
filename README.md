@@ -1,6 +1,6 @@
 # ELK Connector for Node Application Metrics
 
-A connector that collects data using 'appmetrics' and sends it to a configured ElasticSearch instance in LogStash format for use with Kibana.
+A connector that collects data using 'appmetrics' and sends it to a configured Elasticsearch instance in LogStash format for use with Kibana.
 
 ## Getting Started
 
@@ -9,48 +9,57 @@ The ELK Connector for Node Application Metrics can be installed via `npm`:
 ```sh
 $ npm install appmetrics-elk
 ```
-This is designed to be used with an [ElasticSearch][1] database, and a visualization tool such as [Kibana][2].
+This is designed to be used with an [Elasticsearch][1] database, and a visualization tool such as [Kibana][2].
 
 ### Configuring the ELK Connector for Node Application Metrics 
 
 The connector can be used in your application by requiring it as the first line of your application:
 ```js
-var appmetrics = require('appmetrics-elk').monitor();
+const appmetrics = require('appmetrics');
+//...
+require('appmetrics-elk')(appmetrics.monitor());
 ```
-This will send all of the available `appmetrics` data to the ElasticSearch instance, as well as returning an appmetrics object that can be used to control data collection.
+This will send all of the available `appmetrics` data to the Elasticsearch instance, as well as returning an appmetrics object that can be used to control data collection.
 
 ```js
-var appmetrics = require('appmetrics-elk').monitor();
+const appmetrics = require('appmetrics')
+//...
+require('appmetrics-elk')(appmetrics.monitor());
 appmetrics.disable('mysql');            // disable MySQL monitoring
 ```
 
-Additionally, the `monitor()` API call can be passed an optional [ElasticSearch Configuration][3] object to configure the ElasticSearch connection, including database location and security.  
+Additionally, the connector function call can be passed an optional [Elasticsearch Configuration][3] object to configure the Elasticsearch connection, including database location and security.  
 
 The same configuration object can be used to pass configuration to the ELK connector. The following configurations can be applied:
 * `index` (String) the name of the index to use for storing the monitoring data. The default is `appmetrics`.
 * `applicationName` (String) the name to use for the applicationName field in the monitoring data. The default is the name of the applications main file, eg. `app.js`.
 
 ```js
-var config = {
-    hosts: [
-        'https://es1.bluemix.net',
-        'https://es2.bluemix.net'
-    ],
-    ssl: {
-        ca: fs.readFileSync('./cacert.pem'),
-        rejectUnauthorized: true
-    },
+const appmetrics = require('appmetrics');
+const config = {
     index: 'nodedata',
-    applicationName: 'HelloWorld'
+    applicationName: 'HelloWorld',
+//  esClient: {an existing Elasticsearch client instance}
+    esConfig: {
+        hosts: [
+            'https://es1.bluemix.net',
+            'https://es2.bluemix.net'
+        ],
+        ssl: {
+            ca: fs.readFileSync('./cacert.pem'),
+            rejectUnauthorized: true
+        }
+    }
 }
 
-var appmetrics = require('appmetrics-elk').monitor(config);
+const monitoring = appmetrics.monitor();
 appmetrics.disable('mysql');            // disable MySQL monitoring
+require('appmetrics-elk')(monitoring, config);
 ```
 
-### Data Provided to ElasticSearch
+### Data Provided to Elasticsearch
 
-The ELK Connector for Node Application Metrics uploads its data to the 'appmetrics' index in ElasticSearch. It sends the following values to ElasticSearch for every monitoring entry:
+The ELK Connector for Node Application Metrics uploads its data to the 'appmetrics' index in Elasticsearch. It sends the following values to Elasticsearch for every monitoring entry:
 
  Value                   | Description
 :------------------------|:-------------------------------------------
@@ -178,18 +187,18 @@ Additional data is then included depending on the monitoring event.
  mqlight.duration        | The time taken for the message to be handled to in ms 
  
 <a name="custom-data"></a>
-### Sending Custom Data to ElasticSearch
-The Node Application Metrics to ELK Connector registers for events that it is aware of, and forwards the data from those events to ElasticSearch. The registration for those events is based on the 'mappings' files in the following directory:
+### Sending Custom Data to Elasticsearch
+The Node Application Metrics to ELK Connector registers for events that it is aware of, and forwards the data from those events to Elasticsearch. The registration for those events is based on the 'mappings' files in the following directory:
 ```sh
 node_modules/appmetrics-elk/mappings/
 ```
-Any mappings files found in that directory are both used to configure how ElasticSearch handles the data, and to configure the monitoring events that are forwarded.
+Any mappings files found in that directory are both used to configure how Elasticsearch handles the data, and to configure the monitoring events that are forwarded.
 
 The `type` field is used to determine the name of the event to register for, and the `properties` fields are used to determine the values to send. Note that the values in the properties entry in the mapping file must match the fields in the monitoring event data. For example, the CPU event has the following data:
 * `process`
 * `system`
 
-The mapping file that causes this data to be sent to ElasticSearch therefore has the following structure:
+The mapping file that causes this data to be sent to Elasticsearch therefore has the following structure:
 ```json
 {
     "index":  "appmetrics",
@@ -224,7 +233,7 @@ During startup the ELK Connector for Node Application Metrics attempts to provid
 
 Each of these configurations are dynamically loaded from the 'indexes', 'mappings', 'charts' and 'dashboards' directories in the `appmetrics-elk` install directory. It is therefore possible to prevent the configurations from being automatically added by deleting those files, or to add to them by adding existing files.  
 
-**Note:** The 'mappings' directory also provides the configuration of which types of monitoring data are uploaded to ElasticSearch so entries should only be deleted if necessary. See *[Sending Custom Data to ElasticSeach](#custom-data)* for more information.
+**Note:** The 'mappings' directory also provides the configuration of which types of monitoring data are uploaded to Elasticsearch so entries should only be deleted if necessary. See *[Sending Custom Data to ElasticSeach](#custom-data)* for more information.
 
 ### Visualizing the data with Kibana 4
 The pre-configuration for Kibana 4 provdes a number of default visualizations, as well as a default dashboard. These can subsequently be modified or new visualizations and dashboards created.
