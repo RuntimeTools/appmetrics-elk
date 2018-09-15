@@ -1,24 +1,45 @@
 {
-    "index":  "appmetrics",
-    "type":   "leveldown",
-    "body": {
-        "_ttl" : {"enabled" : true, "default" : "90d"},
+  "index": "appmetrics",
+  "type": "doc",
+  "body": {
+    "properties": {
+      "type": {
+        "type": "keyword"
+      },
+      "@timestamp": {
+        "type": "date",
+        "format": "dateOptionalTime"
+      },
+      "host": {
+        "type": "keyword"
+      },
+      "pid": {
+        "type": "integer"
+      },
+      "app": {
+        "type": "keyword"
+      },
+      "leveldown": {
+        "type": "nested",
+        "include_in_parent": true,
         "properties": {
-            "timestamp":        {"type": "date", "format": "dateOptionalTime"},
-            "hostName":         {"type": "string", "index": "not_analyzed"},
-            "pid":              {"type": "integer"},
-            "applicationName":  {"type": "string", "index": "not_analyzed"},
-            "leveldown": {
-                "type": "nested",
-                "include_in_parent": true,
-                "properties": {            
-                    "method":	{"type": "string", "index": "not_analyzed"},
-                    "key":		{"type": "string", "index": "not_analyzed"},
-                    "value":	{"type": "string", "index": "not_analyzed"},
-                    "opCount":	{"type": "long"},
-                    "duration":	{"type": "long"}
-                }
-            }
-        }   
+          "method": {
+            "type": "keyword"
+          },
+          "key": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "keyword"
+          },
+          "opCount": {
+            "type": "long"
+          },
+          "duration": {
+            "type": "long"
+          }
+        }
+      }
     }
+  }
 }

@@ -32,13 +32,13 @@ Additionally, the connector function call can be passed an optional [Elasticsear
 
 The same configuration object can be used to pass configuration to the ELK connector. The following configurations can be applied:
 * `index` (String) the name of the index to use for storing the monitoring data. The default is `appmetrics`.
-* `applicationName` (String) the name to use for the applicationName field in the monitoring data. The default is the name of the applications main file, eg. `app.js`.
+* `app` (String) the name to use for the app field in the monitoring data. The default is the name of the applications main file, eg. `app.js`.
 
 ```js
 const appmetrics = require('appmetrics');
 const config = {
     index: 'nodedata',
-    applicationName: 'HelloWorld',
+    app: 'HelloWorld',
 //  esClient: {an existing Elasticsearch client instance}
     esConfig: {
         hosts: [
@@ -63,10 +63,10 @@ The ELK Connector for Node Application Metrics uploads its data to the 'appmetri
 
  Value                   | Description
 :------------------------|:-------------------------------------------
- timestamp               | The time when the monitoring event occurred
- hostName                | The hostname for the machine the monitored process is running on
+ @timestamp               | The time when the monitoring event occurred
+ host                | The hostname for the machine the monitored process is running on
  pid                     | The process ID for the monitored process
- applicationName         | The JavaScript file used to launch the application, or a custom name
+ app         | The JavaScript file used to launch the application, or a custom name
  
 Additional data is then included depending on the monitoring event.
 
@@ -202,13 +202,12 @@ The mapping file that causes this data to be sent to Elasticsearch therefore has
 ```json
 {
     "index":  "appmetrics",
-    "type":   "cpu",
+    "type":   "doc",
     "body": {
-        "_source" : {"compress" : true},
-        "_ttl" : {"enabled" : true, "default" : "90d"},
         "properties": {
-            "timestamp":    {"type": "date", "format": "dateOptionalTime"},
-            "hostName":     {"type": "string", "index": "not_analyzed"},
+            "type":         {"type": "keyword"},
+            "@timestamp":   {"type": "date", "format": "dateOptionalTime"},
+            "host":         {"type": "keyword"},
             "pid":          {"type": "integer"},
             "cpu": {
                 "type": "nested",

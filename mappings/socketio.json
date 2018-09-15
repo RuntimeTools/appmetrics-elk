@@ -1,22 +1,39 @@
 {
-    "index":  "appmetrics",
-    "type":   "socketio",
-    "body": {
-        "_ttl" : {"enabled" : true, "default" : "90d"},
+  "index": "appmetrics",
+  "type": "doc",
+  "body": {
+    "properties": {
+      "type": {
+        "type": "keyword"
+      },
+      "@timestamp": {
+        "type": "date",
+        "format": "dateOptionalTime"
+      },
+      "host": {
+        "type": "keyword"
+      },
+      "pid": {
+        "type": "integer"
+      },
+      "app": {
+        "type": "keyword"
+      },
+      "socketio": {
+        "type": "nested",
+        "include_in_parent": true,
         "properties": {
-            "timestamp":        {"type": "date", "format": "dateOptionalTime"},
-            "hostName":         {"type": "string", "index": "not_analyzed"},
-            "pid":              {"type": "integer"},
-            "applicationName":  {"type": "string", "index": "not_analyzed"},
-            "socketio": {
-                "type": "nested",
-                "include_in_parent": true,
-                "properties": {
-                    "method":	{"type": "string", "index": "not_analyzed"},
-                    "event":{	"type": "string", "index": "not_analyzed"},
-                    "duration":	{"type": "long"}
-                }
-            }
-        }   
+          "method": {
+            "type": "keyword"
+          },
+          "event": {
+            "type": "keyword"
+          },
+          "duration": {
+            "type": "long"
+          }
+        }
+      }
     }
+  }
 }

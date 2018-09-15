@@ -1,16 +1,19 @@
 {
   "index": ".kibana",
-  "type": "dashboard",
-  "id": "Default-Node-Application-Metrics-Dashboard",
+  "type": "doc",
+  "id": "dashboard:Default-Node-Application-Metrics-Dashboard",
   "body": {
-    "title": "Default Node Application Metrics Dashboard",
-    "hits": 0,
-    "description": "",
-    "panelsJSON": "[{\"col\":1,\"id\":\"Process-CPU-Usage\",\"row\":4,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Process-Physical-Memory-Usage\",\"row\":7,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"URL-Performance\",\"row\":1,\"size_x\":10,\"size_y\":3,\"type\":\"visualization\"},{\"col\":6,\"id\":\"GC-Memory-Usage\",\"row\":7,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"id\":\"GC-Performance\",\"type\":\"visualization\",\"size_x\":5,\"size_y\":3,\"col\":6,\"row\":4}]",
-    "version": 1,
-    "timeRestore": false,
-    "kibanaSavedObjectMeta": {
-      "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+    "type": "dashboard",
+    "dashboard": {
+      "title": "Default Node Application Metrics Dashboard",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"Process-CPU-Usage\",\"row\":4,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Process-Physical-Memory-Usage\",\"row\":7,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"URL-Performance\",\"row\":1,\"size_x\":10,\"size_y\":3,\"type\":\"visualization\"},{\"col\":6,\"id\":\"GC-Memory-Usage\",\"row\":7,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"id\":\"GC-Performance\",\"type\":\"visualization\",\"size_x\":5,\"size_y\":3,\"col\":6,\"row\":4}]",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
     }
   }
 }

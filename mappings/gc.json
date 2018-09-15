@@ -1,23 +1,42 @@
 {
-    "index":  "appmetrics",
-    "type":   "gc",
-    "body": {
-        "_ttl" : {"enabled" : true, "default" : "90d"},
+  "index": "appmetrics",
+  "type": "doc",
+  "body": {
+    "properties": {
+      "type": {
+        "type": "keyword"
+      },
+      "@timestamp": {
+        "type": "date",
+        "format": "dateOptionalTime"
+      },
+      "host": {
+        "type": "keyword"
+      },
+      "pid": {
+        "type": "integer"
+      },
+      "app": {
+        "type": "keyword"
+      },
+      "gc": {
+        "type": "nested",
+        "include_in_parent": true,
         "properties": {
-            "timestamp":        {"type": "date", "format": "dateOptionalTime"},
-            "hostName":         {"type": "string", "index": "not_analyzed"},
-            "pid":              {"type": "integer"},
-            "applicationName":  {"type": "string", "index": "not_analyzed"},
-            "gc": {
-                "type": "nested",
-                "include_in_parent": true,
-                "properties": {
-                    "type":         {"type": "string"},
-                    "size":         {"type": "long"},
-                    "used":         {"type": "long"},
-                    "duration":     {"type": "long"}
-                }
-            }
+          "type": {
+            "type": "text"
+          },
+          "size": {
+            "type": "long"
+          },
+          "used": {
+            "type": "long"
+          },
+          "duration": {
+            "type": "long"
+          }
         }
+      }
     }
+  }
 }
