@@ -10,6 +10,9 @@
     "elasticsearch": "*"
   },
   "scripts": {
+    "fix-prettier": "prettier --single-quote --trailing-comma es5 --print-width 120 --write {bin,lib,probes,tests}/**/*.js *.js",
+    "fix-eslint": "eslint --fix {lib}/**/*.js *.js",
+    "pretest": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -26,5 +29,10 @@
     "type": "git",
     "url": "git://github.com/RuntimeTools/appmetrics-elk"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-strongloop": "^2.1.0",
+    "prettier": "^1.4.4"
+  }
 }
