@@ -23,6 +23,12 @@
         "type": "nested",
         "include_in_parent": true,
         "properties": {
+          "collection": {
+            "type": "keyword"
+          },
+          "method": {
+            "type": "keyword"
+          },
           "query": {
             "type": "keyword"
           },
